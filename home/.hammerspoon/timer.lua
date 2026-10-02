@@ -7,6 +7,7 @@ local menubar = hs.menubar.new()
 local startTime = os.time()
 local nextPopupAt = 75
 local lockedAt = nil
+local onBreak = false
 
 local function minutesSince(t)
 	return (os.time() - t) / 60
@@ -28,11 +29,14 @@ local function refresh()
 
 	if minutes >= nextPopupAt then
 		nextPopupAt = nextPopupAt + 15
-		hs.dialog.blockAlert(text, "Time for a break")
+		if hs.dialog.blockAlert(text, "Take a break", "OK", "Not now") == "OK" then
+			onBreak = true
+			hs.caffeinate.lockScreen()
+		end
 	end
 end
 
-function M.reset()
+local function reset()
 	startTime = os.time()
 	nextPopupAt = 75
 	refresh()
@@ -42,10 +46,16 @@ local function onScreenEvent(e)
 	if e == hs.caffeinate.watcher.screensDidLock then
 		lockedAt = os.time()
 	elseif e == hs.caffeinate.watcher.screensDidUnlock then
-		if lockedAt and minutesSince(lockedAt) >= 15 then
-			M.reset()
-		end
+		local lockedFor = minutesSince(lockedAt)
 		lockedAt = nil
+		if onBreak or lockedFor >= 30 then
+			onBreak = false
+			reset()
+		elseif lockedFor >= 3 and minutesSince(startTime) >= 45 then
+			if hs.dialog.blockAlert("Taken a break?", "", "Yes", "No") == "Yes" then
+				reset()
+			end
+		end
 	end
 end
 
@@ -53,8 +63,6 @@ function M.start()
 	-- keep references so they aren't garbage-collected
 	M._refreshTimer = hs.timer.doEvery(10, refresh)
 	M._lockWatcher = hs.caffeinate.watcher.new(onScreenEvent):start()
-
-	menubar:setClickCallback(M.reset)
 	refresh()
 end
 

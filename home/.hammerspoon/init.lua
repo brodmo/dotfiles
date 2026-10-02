@@ -6,8 +6,6 @@ local timer = require("timer")
 
 timer.start() -- session-length clock in the menubar
 
--- hyper.bindAction("space", timer.reset) -- Fires accidentally sometimes?
-
 --- APP HOTKEYS ---
 
 hyper.bindAction("w", function() apps.open("Brave Browser") end) -- Web
