@@ -5,15 +5,14 @@ local M = {} -- Module
 
 local menubar = hs.menubar.new()
 local startTime = os.time()
-local nextPopupAt = 75
 local lockedAt = nil
-local onBreak = false
 
 local function minutesSince(t)
 	return (os.time() - t) / 60
 end
 
 local function formatDuration(minutes)
+	minutes = math.floor(minutes)
 	if minutes < 60 then
 		return string.format("%dm", minutes)
 	end
@@ -21,41 +20,21 @@ local function formatDuration(minutes)
 end
 
 local function refresh()
-	if lockedAt then return end
-	local minutes = math.floor(minutesSince(startTime))
-	local emoji = minutes < 45 and "" or minutes < 75 and "⚠️ " or "🚨 "
-	local text = emoji .. formatDuration(minutes)
-	menubar:setTitle(text)
-
-	if minutes >= nextPopupAt then
-		nextPopupAt = nextPopupAt + 15
-		if hs.dialog.blockAlert(text, "Take a break", "OK", "Not now") == "OK" then
-			onBreak = true
-			hs.caffeinate.lockScreen()
-		end
-	end
-end
-
-local function reset()
-	startTime = os.time()
-	nextPopupAt = 75
-	refresh()
+	local minutes = minutesSince(startTime)
+	local emoji = minutes < 30 and "" or minutes < 60 and "☕ " or "🚨 "
+	menubar:setTitle(emoji .. formatDuration(minutes))
 end
 
 local function onScreenEvent(e)
 	if e == hs.caffeinate.watcher.screensDidLock then
 		lockedAt = os.time()
-	elseif e == hs.caffeinate.watcher.screensDidUnlock then
+	elseif e == hs.caffeinate.watcher.screensDidUnlock then -- any lock counts as a break
 		local lockedFor = minutesSince(lockedAt)
-		lockedAt = nil
-		if onBreak or lockedFor >= 30 then
-			onBreak = false
-			reset()
-		elseif lockedFor >= 3 and minutesSince(startTime) >= 45 then
-			if hs.dialog.blockAlert("Taken a break?", "", "Yes", "No") == "Yes" then
-				reset()
-			end
+		if lockedFor < 120 then
+			hs.alert.show("☕ " .. formatDuration(lockedFor))
 		end
+		startTime = os.time()
+		refresh()
 	end
 end
 
