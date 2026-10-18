@@ -24,7 +24,9 @@
   },
   "icon_theme": "Material Icon Theme",
   "agent": {
-    "sidebar_side": "right",
+    "threads_sidebar": {
+      "position": "right"
+    },
     "dock": "right",
   },
   "project_panel": {
@@ -108,6 +110,14 @@
   },
   "lsp": {
     "tinymist": {
+      // Wrapper refreshes tinymist.lock on every (re)start
+      "binary": {
+        "path": "/bin/sh",
+        "arguments": [
+          "-c",
+          "set -e; if [ -f tinymist.lock ]; then tinymist compile --save-lock main.typ >&2; fi; exec tinymist lsp",
+        ],
+      },
       "initialization_options": {
         // Enable background preview
         // Server will be running on 127.0.0.1:23635
