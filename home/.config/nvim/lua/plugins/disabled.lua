@@ -1,5 +1,3 @@
 return {
-  -- disable tabs
-  -- { "akinsho/bufferline.nvim", enabled = false },
   { "folke/flash.nvim", enabled = false },
 }

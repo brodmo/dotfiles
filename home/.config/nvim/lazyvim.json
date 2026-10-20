@@ -3,6 +3,7 @@
     "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.editor.inc-rename",
     "lazyvim.plugins.extras.editor.refactoring",
+    "lazyvim.plugins.extras.lang.typst",
     "lazyvim.plugins.extras.test.core"
   ],
   "install_version": 8,
