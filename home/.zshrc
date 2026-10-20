@@ -1,10 +1,5 @@
 # === Definitions ===
 
-export PATH="$HOME/Cloud/Setup/pdfutil:$PATH"
-export PATH="/opt/homebrew/opt/avr-gcc@8/bin:$PATH"
-
-export JAVA_HOME="$HOME/Library/Java/JavaVirtualMachines/jbr-21.0.7/Contents/Home"
-
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
 
@@ -29,7 +24,7 @@ function y() {
 HISTSIZE=10000
 SAVEHIST=10000
 
-setopt INC_APPEND_HISTORY
+setopt INC_APPEND_HISTORY_TIME
 setopt EXTENDED_HISTORY
 
 setopt HIST_IGNORE_DUPS
@@ -39,7 +34,6 @@ TMOUT=7200
 
 # === Setup ====
 
-touch ~/.hushlogin
 PS1=$'
 %F{blue}%{\e[3m%}%~%{\e[0m%}%f '
 
