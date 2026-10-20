@@ -1,7 +1,14 @@
-# === Definitions ===
+# === General ===
+
+PS1=$'
+%F{blue}%{\e[3m%}%~%{\e[0m%}%f '
+
+TMOUT=7200
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
+
+# === Aliases ===
 
 alias ssh="TERM=xterm-256color ssh"  # for tmux
 
@@ -19,7 +26,7 @@ function y() {
     rm -f -- "$tmp"
 }
 
-# ==== History ===
+# === History ===
 
 HISTSIZE=10000
 SAVEHIST=10000
@@ -30,13 +37,9 @@ setopt EXTENDED_HISTORY
 setopt HIST_IGNORE_DUPS
 zshaddhistory() { [[ $1 != (y|lg)$'\n' ]] }
 
-TMOUT=7200
+# === Plugins ===
 
-# === Setup ====
-
-PS1=$'
-%F{blue}%{\e[3m%}%~%{\e[0m%}%f '
-
+# configure vi mode
 ZVM_INIT_MODE=sourcing
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 function zvm_after_lazy_keybindings() {
@@ -46,8 +49,9 @@ function zvm_after_lazy_keybindings() {
     zvm_bindkey visual 'P' zvm_visual_paste_clipboard
 }
 
-eval "$(sheldon source)"
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # make completions case-insensitive
 
-eval "$(fzf --zsh)"
+eval "$(sheldon source)"
+
 eval "$(zoxide init zsh)"
+zsh-defer -c 'eval "$(fzf --zsh)"' # delayed for keybindings

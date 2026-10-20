@@ -1,5 +1,11 @@
 shell = "zsh"
 
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
 dir = "src"
@@ -11,11 +17,14 @@ inline = "autoload -Uz compinit && compinit"
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
 
+[plugins.zsh-vi-mode]
+github = "jeffreytse/zsh-vi-mode"
+apply = ["defer"]
+
 [plugins.autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
+apply = ["defer"]
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
-
-[plugins.zsh-vi-mode]
-github = "jeffreytse/zsh-vi-mode"
+apply = ["defer"]
