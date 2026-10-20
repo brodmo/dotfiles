@@ -30,6 +30,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
 
 setopt HIST_IGNORE_DUPS
 zshaddhistory() { [[ $1 != (y|lg)$'\n' ]] }
@@ -42,9 +43,17 @@ touch ~/.hushlogin
 PS1=$'
 %F{blue}%{\e[3m%}%~%{\e[0m%}%f '
 
-eval "$(sheldon source)"
+ZVM_INIT_MODE=sourcing
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+function zvm_after_lazy_keybindings() {
+    zvm_bindkey vicmd 'p' zvm_paste_clipboard_after
+    zvm_bindkey vicmd 'P' zvm_paste_clipboard_before
+    zvm_bindkey visual 'p' zvm_visual_paste_clipboard
+    zvm_bindkey visual 'P' zvm_visual_paste_clipboard
+}
 
-autoload -Uz compinit;compinit
+eval "$(sheldon source)"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"

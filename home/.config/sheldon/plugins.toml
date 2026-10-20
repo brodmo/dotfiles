@@ -1,7 +1,21 @@
 shell = "zsh"
 
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+dir = "src"
+apply = ["fpath"]
+
+[plugins.compinit]
+inline = "autoload -Uz compinit && compinit"
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+
 [plugins.autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
+
+[plugins.zsh-vi-mode]
+github = "jeffreytse/zsh-vi-mode"
