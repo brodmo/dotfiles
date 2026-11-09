@@ -1,14 +1,12 @@
 gui:
-  scrollHeight: 10
-  scrollPastBottom: true
-  scrollOffMargin: 5
-  scrollOffBehavior: margin
+  scrollHeight: 8
   commitHashLength: 0
   nerdFontsVersion: 3
-  sidePanelWidth: .25
-  mainPanelSplitMode: vertical
+  # sidePanelWidth: .3
+  # mainPanelSplitMode: vertical
+  portraitModeAutoMaxWidth: 100
   skipDiscardChangeWarning: true
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta
+      command: delta

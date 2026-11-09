@@ -10,9 +10,9 @@ timer.start() -- session-length clock in the menubar
 
 hyper.bindAction("w", function() apps.open("Brave Browser") end) -- Web
 hyper.bindAction("f", function() apps.open("draw.io") end) -- Files
-hyper.bindAction("p", function() apps.cycle({ "Zed", "PyCharm" }) end) -- Programming
+hyper.bindAction("p", function() apps.open("Zed") end) -- Programming
 
-hyper.bindAction("a", function() apps.cycle({ "Claude", "ChatGPT" }) end) -- AI
+hyper.bindAction("a", function() apps.open("Claude") end) -- AI
 hyper.bindAction("r", function() apps.open("Obsidian") end) -- Read
 hyper.bindAction("s", function() apps.open("Spotify") end)
 hyper.bindAction("t", function() apps.open("Ghostty") end) -- Terminal

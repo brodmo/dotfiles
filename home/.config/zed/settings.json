@@ -24,6 +24,8 @@
   },
   "icon_theme": "Material Icon Theme",
   "agent": {
+    "expand_terminal_card": false,
+    "expand_edit_card": false,
     "threads_sidebar": {
       "position": "right"
     },
@@ -50,7 +52,7 @@
       "type": "registry",
       "default_config_options": {
         "model": "opus",
-        "mode": "default",
+        "mode": "auto",
       },
     },
     "opencode": {

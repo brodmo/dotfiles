@@ -2,12 +2,18 @@
   {
     "context": "Workspace",
     "bindings": {
-      "cmd-s": "project_panel::ToggleFocus",
-      "cmd-t": "terminal_panel::ToggleFocus",
-      "cmd-r": "agent::ToggleFocus",
-      // focus center pane with cmd-e
-      // close panes with cmd-w
+      "cmd-r": "multi_workspace::ToggleWorkspaceSidebar",  // Repos
+      "cmd-t": "terminal_panel::Toggle",                   // Terminal
+      "cmd-s": "project_panel::Toggle",                    // Select
+      "cmd-e": "workspace::FocusCenterPane",               // Editor
       "cmd-shift-t": "project_symbols::Toggle", // shadowed by terminal
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-[": "workspace::ActivatePaneLeft",
+      "cmd-]": "workspace::ActivatePaneRight",
     },
   },
   {
@@ -21,10 +27,10 @@
     "context": "VimControl && !menu",
     "bindings": {
       "g l": ["task::Spawn", { "task_name": "lazygit" }],
-      "h": ["workspace::SendKeystrokes", "ctrl-o"],
-      "j": ["workspace::SendKeystrokes", "ctrl-i"],
-      "k": ["workspace::SendKeystrokes", "\" _ d d"],
-      "l": "vim::FirstNonWhitespace",
+      "h": ["workspace::SendKeystrokes", "ctrl-o"],    // History
+      "j": ["workspace::SendKeystrokes", "ctrl-i"],    // Jump
+      "k": ["workspace::SendKeystrokes", "\" _ d d"],  // Kill
+      "l": "vim::FirstNonWhitespace",                  // Left
     },
   },
 ]
