@@ -5,6 +5,7 @@ brew "fd"
 brew "fzf"
 brew "zoxide"
 brew "sheldon"
+brew "media-control"
 
 brew "yazi"
 brew "neovim"

@@ -47,6 +47,7 @@ local function refresh()
 	local emoji = minutes < 30 and "" or minutes < 60 and "☕ " or "🌙 "
 	menubar:setTitle(emoji .. formatDuration(minutes))
 	if minutes >= 60 and isActive() and not inMeeting() then
+		hs.execute("/opt/homebrew/bin/media-control pause") -- whatever is in Now Playing
 		hs.caffeinate.lockScreen()
 	end
 end
