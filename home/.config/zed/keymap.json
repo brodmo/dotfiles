@@ -2,11 +2,22 @@
   {
     "context": "Workspace",
     "bindings": {
-      "cmd-r": "multi_workspace::ToggleWorkspaceSidebar",  // Repos
-      "cmd-t": "terminal_panel::Toggle",                   // Terminal
-      "cmd-s": "project_panel::Toggle",                    // Select
-      "cmd-e": "workspace::FocusCenterPane",               // Editor
-      "cmd-shift-t": "project_symbols::Toggle", // shadowed by terminal
+      "cmd-e": "workspace::FocusCenterPane", // Editor
+      "cmd-s": "project_panel::Toggle",      // Select
+      "cmd-t": "terminal_panel::Toggle",     // Terminal
+      "cmd-y": "project_symbols::Toggle",    // sYmbols
+
+      "cmd-o": "projects::OpenRecent", // Swap since most recent is more common
+      "cmd-alt-o": "workspace::Open",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-b": "editor::GoToDefinition",  // From IntelliJ
+      "cmd-r": "editor::Rename",
+      "cmd-u": "editor::FindAllReferences",  // Usages
+      "cmd-y": "project_symbols::Toggle",
     },
   },
   {
