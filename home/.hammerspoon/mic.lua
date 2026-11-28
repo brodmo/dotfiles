@@ -3,7 +3,7 @@ local hs = hs
 
 local M = {} -- Module
 
-local function mutedIcon() -- mic-off icon, scaled to text height with a gap before the title
+local function mutedIcon() -- mic-off icon, scaled to text height with a gap before the text
 	local height, gap = 16, 14
 	local icon = hs.image.imageFromPath(hs.configdir .. "/mic-slash.png") -- SF Symbol mic.slash.fill
 	local width = icon:size().w * height / icon:size().h
@@ -12,7 +12,7 @@ local function mutedIcon() -- mic-off icon, scaled to text height with a gap bef
 	return canvas:imageFromCanvas()
 end
 mutedIcon = mutedIcon()
-local menubar -- icon of a menubar item shared with other modules
+local menubar -- shared with timer.lua, which sets the text; this sets the icon
 
 local function refresh()
 	menubar:setIcon(hs.audiodevice.defaultInputDevice():inputMuted() and mutedIcon or nil, false) -- false: keep the red

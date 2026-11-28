@@ -3,7 +3,7 @@ local hs = hs
 
 local M = {} -- Module
 
-local menubar -- title of a menubar item shared with other modules
+local menubar -- shared with mic.lua, which sets the icon; this sets the text
 local startTime = os.time()
 local lockedAt = nil
 local inputTimes = {} -- timestamps of recent key presses and clicks

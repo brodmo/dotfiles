@@ -1,4 +1,4 @@
-require("hs.ipc").cliInstall(os.getenv("HOME") .. "/.local") -- `hs` command line tool
+require("hs.ipc").cliInstall(os.getenv("HOME") .. "/.local", true) -- `hs` command line tool; silent, since Hammerspoon ships no man page to link
 
 local hyper = require("hyper")
 local apps = require("apps")
@@ -7,9 +7,9 @@ local display = require("display")
 local timer = require("timer")
 local mic = require("mic")
 
-local menubar = hs.menubar.new()
-timer.start(menubar) -- session-length clock as the title
-mic.start(menubar) -- mic-off icon left of the clock while muted
+local menubar = hs.menubar.new(true, "hammerspoon") -- stable name so macOS and Thaw remember its position
+timer.start(menubar) -- text: session clock
+mic.start(menubar) -- icon: mic-off while muted, left of the text
 
 --- APP HOTKEYS ---
 
