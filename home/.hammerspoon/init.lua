@@ -6,8 +6,10 @@ local keys = require("keys")
 local display = require("display")
 local timer = require("timer")
 local mic = require("mic")
+local scroll = require("scroll")
 
 local menubar = hs.menubar.new(true, "hammerspoon") -- stable name so macOS and Thaw remember its position
+menubar:setClickCallback(hs.reload)
 timer.start(menubar) -- text: session clock
 mic.start(menubar) -- icon: mic-off while muted, left of the text
 
@@ -35,8 +37,8 @@ hyper.bindKey("n", "down")
 hyper.bindKey("e", "up")
 hyper.bindKey("i", "right")
 
-hyper.bindAction(",", function() keys.sendKey({}, "pageup") end)
-hyper.bindAction(".", function() keys.sendKey({}, "pagedown") end)
+hyper.bindAction(",", function() scroll.step(-1) end)
+hyper.bindAction(".", function() scroll.step(1) end)
 
 hyper.bindAction("escape", function() keys.sendMediaKey("PLAY") end)
 hyper.bindAction("f1", function() keys.sendMediaKey("SOUND_DOWN") end)

@@ -17,6 +17,7 @@ cask "hammerspoon"
 cask "espanso"
 cask "linearmouse"
 cask "raycast"
+cask "homerow"
 
 cask "brave-browser"
 cask "obsidian"

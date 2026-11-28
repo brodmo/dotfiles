@@ -1,5 +1,5 @@
 gui:
-  scrollHeight: 8
+  scrollHeight: 1
   commitHashLength: 0
   nerdFontsVersion: 3
   # sidePanelWidth: .3
