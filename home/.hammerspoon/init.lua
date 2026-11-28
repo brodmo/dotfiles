@@ -1,10 +1,15 @@
+require("hs.ipc").cliInstall(os.getenv("HOME") .. "/.local") -- `hs` command line tool
+
 local hyper = require("hyper")
 local apps = require("apps")
 local keys = require("keys")
 local display = require("display")
 local timer = require("timer")
+local mic = require("mic")
 
-timer.start() -- session-length clock in the menubar
+local menubar = hs.menubar.new()
+timer.start(menubar) -- session-length clock as the title
+mic.start(menubar) -- mic-off icon left of the clock while muted
 
 --- APP HOTKEYS ---
 
@@ -39,6 +44,9 @@ hyper.bindAction("f2", function() keys.sendMediaKey("SOUND_UP") end)
 
 hyper.bindAction("2", function() keys.sendKey({ "cmd", "shift" }, "[") end)
 hyper.bindAction("3", function() keys.sendKey({ "cmd", "shift" }, "]") end)
+
+hyper.bindAction("`", mic.toggle)
+hs.hotkey.bind({}, "f19", mic.toggle) -- mic key on the Corne
 
 --- DISPLAY CONTROLS ---
 

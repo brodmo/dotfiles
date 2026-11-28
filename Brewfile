@@ -11,6 +11,7 @@ brew "yazi"
 brew "neovim"
 brew "lazygit"
 brew "git-delta"
+brew "gh"
 
 cask "hammerspoon"
 cask "espanso"

@@ -3,7 +3,7 @@ local hs = hs
 
 local M = {} -- Module
 
-local menubar = hs.menubar.new()
+local menubar -- title of a menubar item shared with other modules
 local startTime = os.time()
 local lockedAt = nil
 local inputTimes = {} -- timestamps of recent key presses and clicks
@@ -70,7 +70,8 @@ local function onScreenEvent(e)
 	end
 end
 
-function M.start()
+function M.start(bar)
+	menubar = bar
 	-- keep references so they aren't garbage-collected
 	M._refreshTimer = hs.timer.doEvery(10, refresh)
 	M._lockWatcher = hs.caffeinate.watcher.new(onScreenEvent):start()
